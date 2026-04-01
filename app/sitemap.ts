@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getActiveProducts } from '@/lib/data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.APP_URL || 'https://bijoux-tahiti.com';
+  const baseUrl = process.env.APP_URL || 'https://evolve-tahiti.com';
   const products = getActiveProducts();
 
   const productUrls = products.map((product) => ({

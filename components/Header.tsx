@@ -1,28 +1,98 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
 
 export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Fermer le menu mobile lors d'un changement de page
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Empêcher le défilement de la page quand le menu est ouvert
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const navLinks = [
+    { href: '/produits', label: 'Catalogue' },
+    { href: '/produits/charmes', label: 'Charmes' },
+    { href: '/produits/bracelets', label: 'Bracelets' },
+    { href: '/boutiques', label: 'Boutiques' },
+    { href: '/faq', label: 'FAQ' },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-14 items-center justify-between px-4">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="font-bold sm:inline-block">Bijoux Tahiti</span>
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+      <div className="container mx-auto flex h-24 items-center justify-between px-4 md:px-8">
+        <Link href="/" className="flex items-center z-50">
+          <Image 
+            src="https://evolve-jewellery.co.nz/cdn/shop/t/31/assets/logo.svg?v=8794358632039462281754538610" 
+            alt="Evolve Tahiti" 
+            width={150} 
+            height={50} 
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
-        <nav className="flex items-center space-x-6 text-sm font-medium">
-          <Link href="/produits" className="transition-colors hover:text-foreground/80 text-foreground/60">
-            Catalogue
-          </Link>
-          <Link href="/produits/charmes" className="transition-colors hover:text-foreground/80 text-foreground/60">
-            Charmes
-          </Link>
-          <Link href="/produits/bracelets" className="transition-colors hover:text-foreground/80 text-foreground/60">
-            Bracelets
-          </Link>
-          <Link href="/boutiques" className="transition-colors hover:text-foreground/80 text-foreground/60">
-            Boutiques
-          </Link>
-          <Link href="/faq" className="transition-colors hover:text-foreground/80 text-foreground/60">
-            FAQ
-          </Link>
+
+        {/* Navigation Desktop */}
+        <nav className="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.href} 
+              href={link.href} 
+              className={`transition-colors hover:text-primary ${
+                pathname === link.href ? 'text-primary' : 'text-foreground/80'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Bouton Menu Mobile */}
+        <button 
+          className="md:hidden z-50 p-2 text-foreground focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
+        </button>
+      </div>
+
+      {/* Overlay Menu Mobile (Plein écran pour un effet Luxe/Zen) */}
+      <div 
+        className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${
+          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        <nav className="flex flex-col items-center space-y-8 text-lg uppercase tracking-widest font-light">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.href} 
+              href={link.href} 
+              className={`transition-colors hover:text-primary ${
+                pathname === link.href ? 'text-primary font-medium' : 'text-foreground'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>

@@ -7,7 +7,7 @@ export async function GET() {
   const faqs = getFaqs();
 
   const data = {
-    site: 'Bijoux Tahiti',
+    site: 'Evolve Tahiti',
     description: 'Catalogue de charmes et bracelets en Polynésie',
     products: products.map((p) => ({
       id: p.slug,

@@ -4,30 +4,30 @@ import { Product } from '@/lib/data';
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="group relative rounded-lg border p-4 hover:shadow-md transition-shadow">
+    <article className="group relative flex flex-col">
       <Link href={`/produit/${product.slug}`} className="absolute inset-0 z-10">
         <span className="sr-only">Voir {product.title}</span>
       </Link>
-      <div className="aspect-square relative overflow-hidden rounded-md bg-muted mb-4">
+      <div className="aspect-[4/5] relative overflow-hidden bg-muted mb-6 rounded-sm">
         {product.photos_png[0] ? (
           <Image
             src={product.photos_png[0]}
             alt={product.title}
             fill
-            className="object-cover transition-transform group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             referrerPolicy="no-referrer"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-secondary text-secondary-foreground">
-            Pas d'image
+          <div className="flex h-full w-full items-center justify-center bg-secondary text-secondary-foreground font-light">
+            Image indisponible
           </div>
         )}
       </div>
-      <div className="space-y-1">
-        <h3 className="font-medium leading-none">{product.title}</h3>
-        <p className="text-sm text-muted-foreground capitalize">{product.type}</p>
-        <p className="font-semibold">{product.price_xpf.toLocaleString('fr-FR')} XPF</p>
+      <div className="space-y-2 text-center">
+        <p className="text-xs uppercase tracking-widest text-muted-foreground">{product.type}</p>
+        <h3 className="font-medium text-lg tracking-wide">{product.title}</h3>
+        <p className="text-primary font-medium">{product.price_xpf.toLocaleString('fr-FR')} XPF</p>
       </div>
     </article>
   );

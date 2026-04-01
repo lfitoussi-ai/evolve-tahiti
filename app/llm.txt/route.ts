@@ -6,7 +6,7 @@ export async function GET() {
   const stores = getStores();
   const faqs = getFaqs();
 
-  let text = `# Bijoux Tahiti - Catalogue Structuré\n\n`;
+  let text = `# Evolve Tahiti - Catalogue Structuré\n\n`;
   
   text += `## Produits\n\n`;
   products.forEach((p) => {

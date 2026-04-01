@@ -3,7 +3,7 @@ import { ProductCard } from '@/components/ProductCard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Tous les produits | Bijoux Tahiti',
+  title: 'Tous les produits | Evolve Tahiti',
   description: 'Découvrez notre catalogue complet de charmes et bracelets.',
 };
 
@@ -11,12 +11,13 @@ export default function ProductsPage() {
   const products = getActiveProducts();
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Notre Catalogue</h1>
-        <p className="text-muted-foreground">Tous nos charmes et bracelets.</p>
+    <div className="container mx-auto px-4 py-16 space-y-12">
+      <div className="space-y-4 text-center">
+        <h1 className="text-4xl md:text-5xl font-light uppercase tracking-widest">Notre Catalogue</h1>
+        <div className="w-12 h-0.5 bg-primary mx-auto"></div>
+        <p className="text-muted-foreground font-light tracking-wide">L'intégralité de nos collections.</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12">
         {products.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

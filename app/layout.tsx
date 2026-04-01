@@ -4,7 +4,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Bijoux Tahiti - Catalogue',
+  title: 'Evolve Tahiti - Catalogue',
   description: 'Découvrez notre catalogue de charmes et bracelets.',
 };
 
