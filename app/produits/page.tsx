@@ -15,7 +15,7 @@ export default function ProductsPage() {
       <div className="space-y-4 text-center">
         <h1 className="text-4xl md:text-5xl font-light uppercase tracking-widest">Notre Catalogue</h1>
         <div className="w-12 h-0.5 bg-primary mx-auto"></div>
-        <p className="text-muted-foreground font-light tracking-wide">L'intégralité de nos collections.</p>
+        <p className="text-muted-foreground font-light tracking-wide">L&apos;intégralité de nos collections.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12">
         {products.map((product) => (

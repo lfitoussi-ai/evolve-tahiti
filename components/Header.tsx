@@ -10,11 +10,6 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // Fermer le menu mobile lors d'un changement de page
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
   // Empêcher le défilement de la page quand le menu est ouvert
   useEffect(() => {
     if (isOpen) {
@@ -36,46 +31,54 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-24 items-center justify-between px-4 md:px-8">
-        <Link href="/" className="flex items-center z-50">
-          <Image 
-            src="https://evolve-jewellery.co.nz/cdn/shop/t/31/assets/logo.svg?v=8794358632039462281754538610" 
-            alt="Evolve Tahiti" 
-            width={150} 
-            height={50} 
-            className="h-10 w-auto"
-            priority
-          />
-        </Link>
-
-        {/* Navigation Desktop */}
-        <nav className="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.href} 
-              href={link.href} 
-              className={`transition-colors hover:text-primary ${
-                pathname === link.href ? 'text-primary' : 'text-foreground/80'
-              }`}
-            >
-              {link.label}
+    <>
+      <header className={`sticky top-0 z-50 w-full border-b transition-colors duration-300 ${isOpen ? 'border-transparent bg-transparent' : 'border-border/50 bg-background/80 backdrop-blur-md'}`}>
+        <div className="container mx-auto flex h-20 items-center justify-end px-4 md:px-8 relative">
+          
+          {/* Logo parfaitement centré */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+            <Link href="/" className="flex items-center">
+              <Image 
+                src="https://evolve-jewellery.co.nz/cdn/shop/t/31/assets/logo.svg?v=8794358632039462281754538610" 
+                alt="Evolve Tahiti" 
+                width={100} 
+                height={30} 
+                className="h-4 md:h-5 w-auto"
+                priority
+              />
             </Link>
-          ))}
-        </nav>
+          </div>
 
-        {/* Bouton Menu Mobile */}
-        <button 
-          className="md:hidden z-50 p-2 text-foreground focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
-        </button>
-      </div>
+          {/* Navigation Desktop & Burger Mobile (Alignés à droite) */}
+          <div className="z-50 flex items-center">
+            <nav className="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className={`transition-colors hover:text-primary ${
+                    pathname === link.href ? 'text-primary' : 'text-foreground/80'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-      {/* Overlay Menu Mobile (Plein écran pour un effet Luxe/Zen) */}
+            {/* Bouton Menu Mobile */}
+            <button 
+              className="md:hidden p-2 -mr-2 text-foreground focus:outline-none"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Overlay Menu Mobile (Sorti du <header> pour corriger le bug de superposition lié au backdrop-blur) */}
       <div 
         className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
@@ -86,6 +89,7 @@ export function Header() {
             <Link 
               key={link.href} 
               href={link.href} 
+              onClick={() => setIsOpen(false)}
               className={`transition-colors hover:text-primary ${
                 pathname === link.href ? 'text-primary font-medium' : 'text-foreground'
               }`}
@@ -95,6 +99,6 @@ export function Header() {
           ))}
         </nav>
       </div>
-    </header>
+    </>
   );
 }

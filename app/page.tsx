@@ -15,7 +15,7 @@ export default function Home() {
             Evolve <span className="text-primary font-medium">Tahiti</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground font-light tracking-wide leading-relaxed">
-            L'essence de la nature polynésienne capturée dans des bijoux d'exception. Une collection zen, luxueuse et intemporelle.
+            L&apos;essence de la nature polynésienne capturée dans des bijoux d&apos;exception. Une collection zen, luxueuse et intemporelle.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6 pt-8">
             <Link href="/produits" className="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-10 text-sm uppercase tracking-widest text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg">
