@@ -1,0 +1,6 @@
+slug,type,title,price_xpf,photos_png,description,is_active
+charme-coeur-or,charmes,Charme Cœur Or,4500,https://picsum.photos/seed/charme1/400/400,Un magnifique charme en forme de cœur plaqué or.,true
+charme-etoile-argent,charmes,Charme Étoile Argent,3200,https://picsum.photos/seed/charme2/400/400,Charme étoile filante en argent massif.,true
+bracelet-cuir-tresse,bracelets,Bracelet Cuir Tressé,5500,https://picsum.photos/seed/bracelet1/400/400,Bracelet en cuir véritable tressé à la main.,true
+bracelet-perles-fines,bracelets,Bracelet Perles Fines,6800,https://picsum.photos/seed/bracelet2/400/400,Bracelet élégant avec de véritables perles d'eau douce.,true
+charme-lune,charmes,Charme Lune,3500,https://picsum.photos/seed/charme3/400/400,Charme en forme de croissant de lune.,false
